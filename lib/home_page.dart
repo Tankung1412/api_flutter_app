@@ -1,4 +1,5 @@
 import 'package:api_flutter_app/get_api.dart';
+import 'package:api_flutter_app/get_todos.dart';
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:line_icons/line_icons.dart';
@@ -22,9 +23,8 @@ class _HomePageState extends State<HomePage> {
     GetApi(
 
     ),
-    Text(
-      'Search',
-      style: optionStyle,
+    GetTodos(
+      
     ),
     Text(
       'Profile',

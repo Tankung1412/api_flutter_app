@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -17,9 +18,46 @@ class _GetTodosState extends State<GetTodos> {
 
     return jsonDecode(respones.body) as Map<String,dynamic>;
   }
+  Future<Map<String,dynamic>>? todo;
+  var text='';
+
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      appBar: AppBar(title: const Text('Restful API'),),
+
+      body: Container(
+        alignment: Alignment.center,
+        padding: const EdgeInsets.symmetric(
+          vertical: 50,
+          horizontal: 20,
+        ),
+        child: Column(
+          children: [
+            Text(text),
+            const SizedBox(height: 30,),
+            btnRandom(),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget btnRandom(){
+    return TextButton(
+      onPressed: (){
+        var id = Random().nextInt(30)+1;
+        todo = gettodo(id);
+        todo?.then((value){
+          setState(() {
+            text = 'Title: ${value["title"]}\n';
+            text += 'Complete: ${value["completed"]}';
+        //call = false;
+        });
+    });
+      },
+      child: const Text('Random Todo')
+    );
   }
 }
